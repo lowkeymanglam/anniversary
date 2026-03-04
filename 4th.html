@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4th Anniversary</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+background:#0a0a0f;
+color:white;
+}
+
+/* STARFIELD */
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(white 1px, transparent 1px);
+background-size:3px 3px;
+animation:moveStars 60s linear infinite;
+opacity:0.25;
+}
+@keyframes moveStars{
+from{background-position:0 0;}
+to{background-position:10000px 5000px;}
+}
+
+/* GLOW OVERLAY */
+.glow-bg{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at center, rgba(255,192,203,0.12), transparent 70%);
+filter:blur(80px);
+opacity:0.35;
+}
+
+/* GLASS CARD */
+.card{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:50px 80px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 0 50px rgba(255,215,0,0.2);
+animation:fadeIn 2s ease forwards;
+opacity:0;
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:40px;
+background:linear-gradient(90deg,#fff,#ffd700,#fff);
+background-size:200% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 5s linear infinite;
+margin-bottom:20px;
+}
+@keyframes shine{
+to{background-position:200% center;}
+}
+
+p{
+font-size:18px;
+line-height:1.7;
+opacity:0.9;
+}
+
+.bouquet{
+font-size:60px;
+margin-top:30px;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+/* BUTTON */
+.btn{
+margin-top:30px;
+padding:12px 28px;
+border-radius:30px;
+border:none;
+cursor:pointer;
+font-size:16px;
+background:linear-gradient(45deg,#ff4d6d,#ffd700);
+color:white;
+box-shadow:0 0 20px rgba(255,77,109,0.6);
+transition:0.3s;
+}
+.btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 30px rgba(255,215,0,0.8);
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+pointer-events:none;
+transition:0.5s;
+}
+
+.popup-content{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(20px);
+padding:40px;
+border-radius:25px;
+width:60%;
+text-align:center;
+box-shadow:0 0 40px rgba(255,215,0,0.4);
+}
+
+.popup.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.close{
+margin-top:20px;
+cursor:pointer;
+color:#ffd700;
+}
+
+/* FLOATING PETALS */
+.petal{
+position:absolute;
+color:#ff4d6d;
+font-size:20px;
+animation:fall linear infinite;
+}
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="glow-bg"></div>
+
+<div class="card">
+<h1>HAPPY 4TH YEAR ANNIVERSARY AEIN</h1>
+
+<p>
+4 saal ke safar me kabhi hansi, kabhi aansu aaye,<br>
+kabhi raaste mushkil the, kabhi sapne sajaaye.<br>
+Har girne ke baad humne ek dusre ko sambhala hai,<br>
+Ye 4 saal sirf waqt nahi, ek khoobsurat hawala hai.
+</p>
+
+<div class="bouquet">🌻🤍🌸</div>
+
+<button class="btn" onclick="openPopup()">Click Here ❤️</button>
+</div>
+
+<div class="popup" id="popup">
+<div class="popup-content">
+<h2 style="color:#ffd700;">My Promise To You</h2>
+<p>
+No matter what life brings,<br>
+I promise to stand beside you.<br>
+Through every storm and every sunrise,<br>
+I will choose you again and again.<br><br>
+I’m not here for a season…<br>
+I’m here forever. ❤️<br><br>
+~ Your Kiyomi
+</p>
+<div class="close" onclick="closePopup()">Close</div>
+</div>
+</div>
+
+<script>
+function openPopup(){
+document.getElementById("popup").classList.add("active");
+}
+function closePopup(){
+document.getElementById("popup").classList.remove("active");
+}
+
+function createPetal(){
+const petal=document.createElement("div");
+petal.classList.add("petal");
+petal.innerHTML="🌹";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(5+Math.random()*5)+"s";
+petal.style.opacity=Math.random();
+document.body.appendChild(petal);
+setTimeout(()=>{petal.remove()},10000);
+}
+setInterval(createPetal,500);
+</script>
+
+</body>
+</html>
